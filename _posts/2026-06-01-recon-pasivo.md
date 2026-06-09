@@ -3,6 +3,7 @@ title: "Reconocimiento Pasivo"
 date: 2026-05-09 10:00:00 -0600
 categories: [Cheatsheet, Recon]
 tags: [recon, osint, passive]
+mermaid: true
 ---
 
 ## Introducción
