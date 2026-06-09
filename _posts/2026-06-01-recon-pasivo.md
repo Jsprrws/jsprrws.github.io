@@ -23,7 +23,7 @@ flowchart TD
     W --> P
     H --> P
     O --> P
-    P --> A[Reconocimiento activoSiguiente fase]
+    P --> A[Reconocimiento activo Siguiente fase]
 
     classDef start fill:#F1EFE8,stroke:#5F5E5A,color:#2C2C2A
     classDef src fill:#E6F1FB,stroke:#185FA5,color:#042C53
