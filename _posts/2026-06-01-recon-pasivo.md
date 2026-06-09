@@ -9,6 +9,31 @@ tags: [recon, osint, passive]
 
 El reconocimiento pasivo es la primera fase de una evaluación de seguridad. Se recopila información sin interactuar directamente con los sistemas objetivo, evitando detección y registro.
 
+
+## DIAGRAMA DE RECONOCIMIENTO
+
+```mermaid
+flowchart TD
+    T[Dominio / organización objetivo] --> R[Registro e infraWHOIS, RDAP, DNS, subdominios]
+    T --> W[Huella webHeaders, tecnologías, TLS]
+    T --> H[Histórico y buscadoresWayback, dorks, cache, metadatos]
+    T --> O[OSINT humanoEmpleados, emails, redes, GitHub]
+    R --> P[Perfil del objetivoSuperficie de ataque]
+    W --> P
+    H --> P
+    O --> P
+    P --> A[Reconocimiento activoSiguiente fase]
+
+    classDef start fill:#F1EFE8,stroke:#5F5E5A,color:#2C2C2A
+    classDef src fill:#E6F1FB,stroke:#185FA5,color:#042C53
+    classDef out fill:#E1F5EE,stroke:#0F6E56,color:#04342C
+    classDef next fill:#FAECE7,stroke:#993C1D,color:#4A1B0C
+    class T start
+    class R,W,H,O src
+    class P out
+    class A next
+```
+
 ## Herramientas principales
 
 | Herramienta | Uso | Instalación |
