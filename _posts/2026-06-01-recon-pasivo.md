@@ -209,6 +209,19 @@ curl -I https://ejemplo.com | grep -i "x-powered-by\|server"
 7. Compilar información → Crear perfil del objetivo
 ```
 
+## Flujo completo de la metodología
+
+```mermaid
+flowchart TD
+    A[1. Pre-engagementAutorización, alcance, reglas] --> B[2. ReconocimientoOSINT, DNS, subdominios]
+    B --> C[3. EscaneoPuertos, servicios, vulns]
+    C --> D[4. ExplotaciónOWASP Top 10, PoC]
+    D --> E[5. Post-explotaciónPersistencia, escalada]
+    E --> F[6. ReporteHallazgos, riesgo, evidencia]
+    F --> G[7. RemediaciónCorrección y re-test]
+    G -.re-test.-> C
+```
+
 ## Referencias
 
 - [OWASP Testing Guide](https://owasp.org/www-project-web-security-testing-guide/)
