@@ -49,6 +49,9 @@ flowchart TD
 | `whois.cymru.com` | IP reputation | Online |
 | `VirusTotal` | Análisis de malware y phishing | Online |
 | `Shodan` | Motor de búsqueda IoT/servidores | Online |
+| `search.censys.io` | Motor de búsqueda IoT/servidores | Online |
+| `dnsdumpster.com` | Motor de búsqueda de Dominios | Online |
+
 
 ## Comandos comunes
 
@@ -92,12 +95,28 @@ dig -x 8.8.8.8
 ### Detección de WAF
 
 ```bash
-# Identificar Web Application Firewall
-wafw00f https://ejemplo.com
-
-# Análisis más detallado
-wafw00f -a https://ejemplo.com
+wafw00f https://ejemplo.com -a              # prueba todas las firmas, no para en la primera coincidencia
+wafw00f -i lista_urls.txt                   # modo lote desde archivo
+wafw00f https://ejemplo.com -o salida.json -f json   # exportar para el reporte
+wafw00f -l                                  # listar todos los WAF que sabe detectar
+wafw00f https://ejemplo.com -p proxy.txt    # a través de proxy (útil con Burp)
 ```
+> ⚠️ **IMPORTANTE**: wafw00f muchas veces da falsos positivos se recomienda utilizar otras alternativas.
+
+```bash
+nmap -p 80,443 --script http-waf-detect,http-waf-fingerprint ejemplo.com                                      # scripts NSE de nmap
+identYwaf https://ejemplo.com                                                                                 # detección por anomalías en respuestas
+curl -sI https://ejemplo.com | grep -iE "server|x-powered|x-cdn|x-sucuri|x-akamai|cf-ray|x-amz|set-cookie"    # Verificar respuesta por curl
+```
+
+| Indicio | WAF/CDN probable |
+|---------|------------------|
+| `cf-ray`, `Server: cloudflare` | Cloudflare |
+| `x-sucuri-id`, `x-sucuri-cache` | Sucuri |
+| `Server: AkamaiGHost`, `x-akamai-*` | Akamai |
+| Cookie `incap_ses_`, `visid_incap_` | Imperva Incapsula |
+| `x-amzn-*`, `x-amz-cf-id` | AWS WAF / CloudFront |
+| Página "Request Rejected" + ID de soporte | F5 BIG-IP ASM |
 
 ### Inspección HTTP Headers
 
