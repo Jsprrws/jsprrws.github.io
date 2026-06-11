@@ -113,9 +113,11 @@ cat hosts.txt | httpx -td -title -sc -server -ip -cdn -o live.txt
 ffuf -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-20000.txt -u "http://$T/" -H "Host: FUZZ.target.internal" -ac -mc all -fs <baseline>
 
 # gobuster vhost — lógica de petición distinta, atrapa casos límite
-gobuster vhost -u "http://$T/" -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-5000.txt --append-domain -k -t 30
+gobuster vhost -u <dominio> -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-5000.txt --append-domain -k -t 30
 
 #dnsenum --enum inlanefreight.com -f /usr/share/seclists/Discovery/DNS/subdomains-top1million-20000.txt -r
+
+gobuster vhost -u <dominio> -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-110000.txt --append-domain
 
 ```
 
