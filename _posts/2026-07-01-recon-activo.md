@@ -38,7 +38,7 @@ flowchart TD
     style G fill:#9a6700,color:#fff
 ```
 
-> **La disciplina de alcance no es negociable.** Toda técnica aquí toca al objetivo. Ejecútalas solo contra activos que poseas o estés autorizado por escrito a probar. El reconocimiento activo no autorizado es un delito en casi cualquier jurisdicción, sin importar la intención. Confirma el alcance *antes* del primer paquete.
+> **ANALIZAR SI SE PUDO OBTENER EL MAXIMO DE INFORMACION DEL HOST A ATACAR**, Analizar correctamente el grafico.
 {: .prompt-danger }
 
 ---
