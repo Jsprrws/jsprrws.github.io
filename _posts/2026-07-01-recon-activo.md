@@ -110,13 +110,13 @@ flowchart LR
 cat hosts.txt | httpx -td -title -sc -server -ip -cdn -o live.txt
 
 # Fuzzing de VHost — alto valor, baja huella en DNS
-ffuf -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-20000.txt \
-  -u "http://$T/" -H "Host: FUZZ.target.internal" -ac -mc all -fs <baseline>
+ffuf -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-20000.txt -u "http://$T/" -H "Host: FUZZ.target.internal" -ac -mc all -fs <baseline>
 
 # gobuster vhost — lógica de petición distinta, atrapa casos límite
-gobuster vhost -u "http://$T/" \
-  -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-5000.txt \
-  --append-domain -k -t 30
+gobuster vhost -u "http://$T/" -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-5000.txt --append-domain -k -t 30
+
+#dnsenum --enum inlanefreight.com -f /usr/share/seclists/Discovery/DNS/subdomains-top1million-20000.txt -r
+
 ```
 
 > `-fs <baseline>` es todo el juego. Envía una petición con un Host *basura*, anota el tamaño por defecto, fíltralo. Todo lo que *difiera* del default es un vhost real. Sin esto te ahogas en 200s idénticos.
